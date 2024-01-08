@@ -1,0 +1,35 @@
+<?xml version='1.0'?>
+<sdf version='1.9'>
+  <model name='red_marker'>
+    <pose>0 0 0.18 0 0 0</pose>
+    <link name='base_link'>
+      <inertial>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.0001</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0001</iyy>
+          <iyz>0</iyz>
+          <izz>0.0001</izz>
+        </inertia>
+      </inertial>
+      <visual name='base_main_viz'>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://sapodrone/meshes/drone.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name='base_col'>
+        <pose>0.0 -0.004 0.0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.17 0.15 0.024</size>
+          </box>
+        </geometry>
+      </collision>
+    </link>
+  </model>
+</sdf>
