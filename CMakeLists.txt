@@ -16,11 +16,28 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # --------------------------------------------------------------------------- #
 # Find gz-sim and dependencies.
-find_package(gz-cmake3 REQUIRED)
-set(GZ_CMAKE_VER ${gz-cmake3_VERSION_MAJOR})
 
-gz_find_package(gz-sim7 REQUIRED)
-set(GZ_SIM_VER ${gz-sim7_VERSION_MAJOR})
+# Harmonic
+if("$ENV{GZ_VERSION}" STREQUAL "harmonic")
+  find_package(gz-cmake3 REQUIRED)
+  set(GZ_CMAKE_VER ${gz-cmake3_VERSION_MAJOR})
+
+  gz_find_package(gz-sim8 REQUIRED)
+  set(GZ_SIM_VER ${gz-sim8_VERSION_MAJOR})
+
+  message(STATUS "Compiling against Gazebo Harmonic")
+# Garden (default)
+elseif("$ENV{GZ_VERSION}" STREQUAL "garden" OR NOT DEFINED "ENV{GZ_VERSION}")
+  find_package(gz-cmake3 REQUIRED)
+  set(GZ_CMAKE_VER ${gz-cmake3_VERSION_MAJOR})
+
+  gz_find_package(gz-sim7 REQUIRED)
+  set(GZ_SIM_VER ${gz-sim7_VERSION_MAJOR})
+
+  message(STATUS "Compiling against Gazebo Garden")
+else()  
+  message(FATAL_ERROR "Unsupported GZ_VERSION: $ENV{GZ_VERSION}")
+endif()
 
 # --------------------------------------------------------------------------- #
 # Find RapidJSON.
